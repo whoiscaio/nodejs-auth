@@ -1,8 +1,9 @@
+import { Request, Response } from 'express';
 import users from '../mocks/users';
 
 class UserController {
-  index() {
-    return users;
+  index(request: Request, response: Response) {
+    response.json(users);
   }
 }
 
