@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
-type User = {
+export type User = {
   username: string,
   password: string
 }
@@ -27,7 +27,7 @@ class AuthController {
           throw new Error('500Environment issue, try again later.');
         }
 
-        const accessToken = jwt.sign(user, jwtSecret);
+        const accessToken = jwt.sign(user, jwtSecret, { expiresIn: '15m' });
 
         response.status(200).json({
           username,

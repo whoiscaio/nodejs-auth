@@ -1,5 +1,8 @@
 import express from 'express';
+import dotenv from 'dotenv';
 import appRouter from './routes/appRouter';
+
+dotenv.config();
 
 const PORT = 3000;
 
