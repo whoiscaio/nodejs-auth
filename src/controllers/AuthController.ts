@@ -9,7 +9,28 @@ type User = {
 const users: User[] = [];
 
 class AuthController {
-  login() {}
+  async login(request: Request, response: Response) {
+    const { username, password } = request.body;
+
+    const user = users.find((user) => user.username === username);
+
+    if (!user) {
+      return response.status(404).json({ message: `User ${username} does not exist.` });
+    }
+
+    try {
+      if (await bcrypt.compare(password, user.password)) {
+        response.status(200).json({
+          username,
+          accessToken: 'TOKEN HERE'
+        });
+      } else {
+        throw new Error('Incorrect password.')
+      }
+    } catch (err: any)  {
+      return response.status(400).json({ message: err.message });
+    }
+  }
 
   async signup(request: Request, response: Response) {
     const { username, password } = request.body;
