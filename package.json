@@ -4,7 +4,8 @@
   "description": "Authentication practice with Node.js and Express",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/app.ts"
+    "resourceStart": "nodemon src/app.ts",
+    "authStart": "nodemon src/auth.ts"
   },
   "author": "@whoiscaio",
   "license": "MIT",
