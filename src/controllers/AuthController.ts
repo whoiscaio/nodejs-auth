@@ -49,8 +49,6 @@ class AuthController {
       response.status(500).json({ message: 'Algum erro aconteceu durante o cadastro, tente mais tarde.' });
     }
   }
-
-  getAccessToken() {}
 }
 
 export default new AuthController();
