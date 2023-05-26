@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
 type User = {
   username: string,
@@ -20,15 +21,26 @@ class AuthController {
 
     try {
       if (await bcrypt.compare(password, user.password)) {
+        const jwtSecret = process.env.JWT_SECRET;
+
+        if (!jwtSecret) {
+          throw new Error('500Environment issue, try again later.');
+        }
+
+        const accessToken = jwt.sign(user, jwtSecret);
+
         response.status(200).json({
           username,
-          accessToken: 'TOKEN HERE'
+          accessToken
         });
       } else {
         throw new Error('Incorrect password.')
       }
     } catch (err: any)  {
-      return response.status(400).json({ message: err.message });
+      const statusCode = String(err.message).includes('500') ? 500 : 400;
+      const message = String(err.message).includes('500') ? err.message.split('500')[1] : err.message;
+
+      return response.status(statusCode).json({ message });
     }
   }
 
