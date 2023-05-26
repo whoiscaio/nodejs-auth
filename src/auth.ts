@@ -9,5 +9,5 @@ auth.use(express.json());
 auth.use(authRouter);
 
 auth.listen(PORT, () => {
-  console.log(`Auth started at http://localhost:${PORT}`);
+  console.log(`🚀 Auth started at http://localhost:${PORT}`);
 })

@@ -5,5 +5,4 @@ const appRouter = Router();
 
 appRouter.get('/users', UserController.index);
 
-
 export default appRouter;
