@@ -8,7 +8,7 @@ function validateAuthFields(request: Request, response: Response, next: NextFunc
     }
 
     if (!password) {
-      return response.status(400).json({ message: 'Field username is required.' });
+      return response.status(400).json({ message: 'Field password is required.' });
     }
 
     next();
